@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash scripts/guard.sh*)",
+      "Bash(bash scripts/build.sh*)",
+      "Bash(python3 scripts/build_tracker.py *)",
+      "Bash(python3 scripts/check_refs.py*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(gh repo create *)",
+      "Bash(gh release *)",
+      "Bash(gh workflow run *)",
+      "Bash(git tag *)"
+    ],
+    "deny": [
+      "Read(./.guard/local-denylist.txt)",
+      "Read(./org/**)",
+      "Read(./events/**)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)"
+    ]
+  }
+}

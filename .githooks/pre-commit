@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Runs the leak guard on staged files. Enable with: git config core.hooksPath .githooks
+mapfile -t staged < <(git diff --cached --name-only --diff-filter=ACM)
+[ ${#staged[@]} -eq 0 ] && exit 0
+# Binary Office files can't be scanned; warn on tracker changes
+for f in "${staged[@]}"; do
+  case "$f" in tracker/*.xlsx) echo "WARNING: tracker changed. Confirm it contains only the EXAMPLE rows.";; esac
+done
+exec scripts/guard.sh "${staged[@]}"

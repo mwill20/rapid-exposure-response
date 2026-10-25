@@ -1,0 +1,43 @@
+name: release
+# Publishes a release whenever VERSION changes on main (or on manual run / version tag).
+on:
+  push:
+    branches: [main]
+    paths: ['VERSION']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve version
+        id: v
+        run: echo "tag=v$(cat VERSION)" >> "$GITHUB_OUTPUT"
+      - name: Skip if release exists
+        id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.v.outputs.tag }}" >/dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Leak guard
+        if: steps.exists.outputs.skip == 'false'
+        run: bash scripts/guard.sh
+      - name: Install tools
+        if: steps.exists.outputs.skip == 'false'
+        run: |
+          sudo apt-get update && sudo apt-get install -y pandoc zip
+          pip install openpyxl
+      - name: Build kit
+        if: steps.exists.outputs.skip == 'false'
+        run: bash scripts/build.sh
+      - name: Publish release
+        if: steps.exists.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.v.outputs.tag }}"
+          gh release create "$TAG" "dist/rer-kit-$TAG.zip" dist/SHA256SUMS.txt \
+            --target "$GITHUB_SHA" --title "RER Kit $TAG" \
+            --notes "See CHANGELOG.md. Verify SHA256 before use."

@@ -1,0 +1,3 @@
+# Copy to .guard/local-denylist.txt (gitignored) and add one private term per line:
+# your employer's name, internal domains, product codenames, colleague names.
+# This file (the example) is committed; your real list never is.

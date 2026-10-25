@@ -1,0 +1,15 @@
+# Never commit filled or org-specific material
+org/
+events/
+*filled*
+*FILLED*
+*_ORG*
+*.local.*
+.guard/local-denylist.txt
+dist/
+~$*
+.DS_Store
+tracker/*.xlsx
+templates/
+.claude/settings.local.json
+CLAUDE.local.md
