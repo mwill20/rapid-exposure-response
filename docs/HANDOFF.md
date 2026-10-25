@@ -1,7 +1,9 @@
 # Handoff: from Claude chat to Claude Code
 
-## Status (v0.2.0 published, M1 complete)
-Public repo: `github.com/mwill20/rapid-exposure-response`. v0.2.0 released 2026-10-25 automatically on the VERSION bump (M1: staged playbook S0 to S7, decision tables DT-1 to DT-4, H7 and hunt outcomes, AAR template, Event Pack and prompts aligned). Scope and sequencing live in `docs/ROADMAP.md`. Next: M2 (v0.3.0) per the roadmap.
+## Status (M2 built, v0.3.0 pending push)
+Public repo: `github.com/mwill20/rapid-exposure-response`. v0.2.0 released 2026-10-25. M2 (Lists data model and import workbook, output schemas, rewritten agent instructions, build guides 00/01/02/09, drill 1 with answer key and scoring) is committed with VERSION 0.3.0. Scope and sequencing live in `docs/ROADMAP.md`. Next: the owner runs guides 01, 02 and 09 at work and records the drill score in the org edition; then M3 (v0.4.0).
+
+M2 acceptance that only the owner can complete: create the Lists from the import workbook, build the agent, run drill 1, score 16/20 with no critical misses. Tenant facts verified from Microsoft Learn on 2026-10-25 and recorded in the guides: one SharePoint list per Agent Builder agent, 100 SharePoint files, 8,000-character instructions, Restricted SharePoint Search blocks SharePoint knowledge, Lists from Excel up to 5,000 rows.
 
 M1 acceptance: checker 100+ references resolve including DT-x and Sx; guard clean; updater tests green; the worked example cites DT-1 rows, a DT-2 row and the DT-4 class. The drill-1 answer key (M2) will be the first independent consistency check of the tables.
 

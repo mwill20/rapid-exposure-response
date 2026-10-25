@@ -34,7 +34,10 @@ A generic, reusable playbook kit for reacting to emerging critical vulnerabiliti
 | `library/decision_tables.md` | DT-1 exposure rubric, DT-2 control matrix, DT-3 evidence standards, DT-4 hunt selection |
 | `reports/AAR_REPORT_TEMPLATE.md` | After-action report, filled copy stays in org SharePoint |
 | `library/sources.md` | Trusted intel sources by tier |
-| `copilot/` | Agent instructions, prompt pack, setup guide |
+| `copilot/` | Agent instructions (under the 8,000-character limit), prompt pack, output schemas, setup guide |
+| `lists/` | Data model for the five SharePoint Lists and the import workbook generator (`RER_Lists_Import.xlsx` in every release) |
+| `build-guides/` | Step-by-step tenant build guides written to be followed with M365 Copilot: 00 read first, 01 site and Lists, 02 Agent Builder, 09 verification drill |
+| `drills/` | Synthetic advisories with answer keys and a scoring sheet; tabletop material and the regression test for the agent |
 | `scripts/build_tracker.py` | Generates the tracker workbook (in every release zip) |
 | `examples/php2shell-event-pack.md` | Worked example from public information |
 | `work-side/Get-RERUpdate.ps1` | Optional read-only updater for the work device (tested with Pester, see `Test-Updater.ps1`) |
@@ -49,8 +52,8 @@ Each release converts every Markdown file to `.docx`, because Copilot Notebooks 
 3. Verify: `Get-FileHash .\rer-kit-vX.Y.Z.zip -Algorithm SHA256` and compare to the checksum file.
 4. Extract into a synced folder such as `RER/upstream/vX.Y.Z` in a **restricted** SharePoint site.
 5. First time only: copy the playbook and tracker into `RER/org/` and fill them in there.
-6. Ground Copilot on both folders (see `copilot/setup.md`).
-7. When a vulnerability drops: copy the Event Pack into `RER/org/events/` and run the **RER-MAP** prompt.
+6. Follow `build-guides/00_READ_FIRST.md`, then 01, 02 and 09, with Copilot walking you through each step.
+7. When a vulnerability drops: run **RER-MAP**, save the Event Pack into `RER/org/events/`, open the event in RER_Events, and ask **RER-NEXT** whenever you are unsure what blocks the current stage.
 
 ## Updating
 

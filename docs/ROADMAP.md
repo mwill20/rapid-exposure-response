@@ -10,7 +10,7 @@ The repo ships two things: the playbook content, and the build guides that let t
 
 ## Architecture (target)
 - **System of record:** five SharePoint Lists in a restricted site (Events, Assets, Controls, Hunts, Evidence). The generated .xlsx is the import source and the fallback.
-- **Advisor:** one Copilot Studio agent, "RER Assistant". Agent Builder is the quickstart only.
+- **Advisor:** one Copilot Studio agent, "RER Assistant". Agent Builder is the quickstart only. Agent Builder accepts one SharePoint list per agent (verified 2026-10-25), so Tier A grounds on RER_Events plus the Event Pack documents in RER/org/events; other list rows are pasted. Tier B grounds on all five lists.
 - **Actions the agent may take:** create and update list rows, post drafts. **Never:** send a message, delete anything, change a control, run a query.
 - **Flows (Power Automate):** KEV email intake to draft event row; temporary-control expiry reminders; owner notices behind a human approval step; AAR report generated into org SharePoint.
 - **Decisions:** deterministic tables in `library/`. The agent cites a row; it does not reason its way to a control.

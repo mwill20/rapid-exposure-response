@@ -1,6 +1,6 @@
 # Prompt pack
 
-Use in the RER Notebook or RER Assistant agent. Replace `{braces}`. Never paste credentials, secrets, or patient data. One command per stage; RER-NEXT works at any stage.
+Use in the RER Notebook or RER Assistant agent. Replace `{braces}`. Never paste credentials, secrets, or patient data. One command per stage; RER-NEXT works at any stage. Every command returns the fixed table defined for it in `copilot/output-schemas.md`, so the result pastes into the matching list (`lists/DATA_MODEL.md`). In Tier A the agent is grounded on the RER_Events list and the Event Packs only; paste rows from the other lists where a prompt says {paste}.
 
 ## RER-MAP (Stage S0, the main one)
 ```text

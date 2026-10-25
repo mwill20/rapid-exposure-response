@@ -38,13 +38,14 @@ DEFS = {
 # matching inside "v1.2" (case-sensitive) and "H1" inside identifiers.
 REFS = [
     ("CTL", re.compile(r"(?<![A-Za-z0-9_-])(CTL-\d{2})(?![0-9])")),
-    ("V", re.compile(r"(?<![A-Za-z0-9_/.-])(V\d)(?![0-9A-Za-z.])")),
-    ("H", re.compile(r"(?<![A-Za-z0-9_/.-])(H\d)(?![0-9A-Za-z.])")),
+    ("V", re.compile(r"(?<![A-Za-z0-9_/.-])(V\d)(?![0-9A-Za-z])(?!\.\d)")),
+    ("H", re.compile(r"(?<![A-Za-z0-9_/.-])(H\d)(?![0-9A-Za-z])(?!\.\d)")),
     ("DT", re.compile(r"(?<![A-Za-z0-9_-])(DT-\d)(?![0-9])")),
-    ("S", re.compile(r"(?<![A-Za-z0-9_/.-])(S\d)(?![0-9A-Za-z.])")),
+    ("S", re.compile(r"(?<![A-Za-z0-9_/.-])(S\d)(?![0-9A-Za-z])(?!\.\d)")),
     ("Section", re.compile(r"\b(?:Playbook\s+)?Section\s+(\d+(?:\.\d+)?)(?![0-9.])")),
     ("Section", re.compile(r"\bPlaybook\s+(\d+\.\d+)(?![0-9.])")),
-    ("Step", re.compile(r"\bStep\s+(\d+)(?![0-9])")),
+    # Build guides have their own numbered steps; only playbook-qualified steps are checked.
+    ("Step", re.compile(r"\bPlaybook\s+Step\s+(\d+)(?![0-9])")),
     ("Appendix", re.compile(r"\bAppendix\s+([A-Z])(?![A-Za-z])")),
     ("Pack", re.compile(r"\b[Ss]ection\s+([A-Z])(?![A-Za-z])")),
 ]

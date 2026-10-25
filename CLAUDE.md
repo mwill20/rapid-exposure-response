@@ -21,9 +21,12 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 - `packs/EVENT_PACK_TEMPLATE.md` per-vuln worksheet (Sections A to I)
 - `library/` controls (CTL-01..07), verification (V1..V7), hunts (H1..H7), sources (tiers), decision_tables (DT-1 exposure, DT-2 controls, DT-3 evidence, DT-4 hunts)
 - `reports/AAR_REPORT_TEMPLATE.md` after-action report (filled copy stays in org SharePoint)
-- `copilot/` agent instructions, prompt pack (RER-MAP, UPSTREAM-DIFF, etc.), setup
+- `copilot/` agent-instructions (block under 8,000 chars), prompts (RER-MAP, RER-NEXT, RER-CONTAIN, ...), output-schemas, setup
+- `lists/DATA_MODEL.md` five SharePoint Lists; `scripts/build_lists_import.py` generates the import workbook
+- `build-guides/` 00 read first, 01 site and Lists, 02 Agent Builder, 09 verification drill (03 to 08 are v0.4.0); every step: Goal / Where / Do / Expect / If different / Verify, with verified-on dates and Learn URLs
+- `drills/` inject-01 advisory (synthetic, includes an embedded-instruction test), answer key, SCORING.md
 - `examples/php2shell-event-pack.md` worked example, public facts only
-- `scripts/` build.sh, build_tracker.py, guard.sh, check_refs.py (+ test_check_refs.sh)
+- `scripts/` build.sh, build_tracker.py, build_lists_import.py, guard.sh, check_refs.py (+ test_check_refs.sh)
 - `work-side/` Get-RERUpdate.ps1 read-only updater, Get-RERUpdate.Tests.ps1 (Pester), Test-Updater.ps1 (analyzer + tests, `-Live` for a real release)
 - `.github/workflows/` guard.yml (leak guard, cross-ref checker, updater analyzer and Pester on every push/PR), release.yml (VERSION change on main, or manual; then a live updater run against the new release)
 - `docs/` HANDOFF.md (status), ROADMAP.md (scope and milestones), KICKOFF_PROMPT.md
@@ -33,6 +36,7 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 bash scripts/guard.sh                         # leak guard over tracked files
 bash scripts/build.sh                         # builds dist/rer-kit-v<VERSION>.zip + SHA256SUMS.txt
 python3 scripts/build_tracker.py out.xlsx     # tracker only
+python3 scripts/build_lists_import.py out.xlsx # Lists import workbook only
 python3 scripts/check_refs.py                 # cross-reference checker (also runs in the pre-commit hook)
 bash scripts/test_check_refs.sh               # checker self-test: real repo passes, planted breaks fail
 pwsh ./work-side/Test-Updater.ps1             # or powershell: PSScriptAnalyzer + Pester for the updater
@@ -45,7 +49,9 @@ Dependencies: git, gh, pandoc, python3 + openpyxl, zip. Updater tests: Windows P
 - IDs are cross-referenced across files (playbook section numbers, stages Sx, CTL-xx, Vx, Hx, DT-x, Event Pack letters). If you renumber anything, update every reference in the same change.
 - Release = bump `VERSION` + add a `CHANGELOG.md` entry. Merging a VERSION change to main publishes the release.
 - Prose style: plain, direct, no em dashes, short sentences. These docs ship publicly under the owner's name.
-- Keep Copilot instruction blocks short enough to paste into a single instructions field.
+- Keep Copilot instruction blocks short enough to paste into a single instructions field (Agent Builder limit: 8,000 characters; check with a character count after editing).
+- Build guides: never state a UI path without the Microsoft Learn or Support URL it came from and the date it was checked. If a path cannot be verified, write the If different prompt and say so.
+- Drills are synthetic: fictional vendor, product and identifier. Never model a drill on a real org event.
 
 ## Definition of done (every change)
 1. `bash scripts/guard.sh` clean.
