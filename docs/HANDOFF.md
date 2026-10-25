@@ -1,5 +1,8 @@
 # Handoff: from Claude chat to Claude Code
 
+## Status (M3 built, v0.4.0 pending push)
+M3 (Tier B: Copilot Studio agent spec, four flow specs, build guides 03 to 08, drills 2 and 3) is committed with VERSION 0.4.0. Tenant facts verified from Microsoft Learn on 2026-10-25: Copilot Studio grounds on SharePoint sites and up to 10 lists per agent; tools can require end-user confirmation and run as the end user; agent flows must respond within 100 seconds with async off; Microsoft 365 Copilot licences zero-rate generative answers in Copilot and Teams while tools and flows may consume credits; Word Online (Business) is a premium connector; trigger payloads are a documented jailbreak surface. Nothing in M3 can be verified from here; guide 08 Part A is the acceptance test the owner runs.
+
 ## Status (v0.3.0 published, M2 complete)
 Public repo: `github.com/mwill20/rapid-exposure-response`. v0.3.0 released 2026-10-25 automatically on the VERSION bump; release and live updater jobs green; zip has 60 entries including `lists/RER_Lists_Import.xlsx` with five tables and a .docx for every guide and drill file, checksum verified after download. M2 = Lists data model and import workbook, output schemas, rewritten agent instructions, build guides 00/01/02/09, drill 1 with answer key and scoring. Scope and sequencing live in `docs/ROADMAP.md`. Next: the owner runs guides 01, 02 and 09 at work and records the drill score in the org edition; then M3 (v0.4.0).
 

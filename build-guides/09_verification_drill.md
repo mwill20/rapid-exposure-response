@@ -51,4 +51,4 @@ Proves that the site, the Lists and the RER Assistant work together, by running 
 - Misses that trace to your tenant (list not grounded, Preparing never finishing, SharePoint knowledge refused) are tenant gaps for your admin, not agent faults.
 
 ## Tier B
-Guides 03 to 08 (v0.4.0) add the Copilot Studio agent and flows. Re-run this drill after each of them; the expected results are the same, with fewer manual pastes.
+Guides 03 to 07 add the Copilot Studio agent and flows. Guide 08 Part A is this drill with the Tier B differences and drill 2; run it after guides 03 to 07.

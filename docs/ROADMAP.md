@@ -51,6 +51,13 @@ P0-1 initialize and publish; P0-2 cross-reference checker; P0-3 updater validate
 - `drills/inject-02`, `inject-03`.
 **Done when:** verification drill passes at work: a KEV email creates a draft event, notices wait for approval, AAR lands in SharePoint.
 
+### M3 design notes (decided 2026-10-25)
+- No autonomous agent triggers. Flow 04 is deterministic and never passes the email body to the agent (Microsoft documents trigger-payload jailbreaks).
+- Every write tool asks the end user before running and runs with the end user's credentials. No delete tool. The only send path is Flow 06 behind a Triage Lead approval.
+- Agent flows respond first when they contain an approval (100-second limit).
+- AAR is saved as HTML with standard connectors; the Word Online (Business) connector is premium and optional.
+- Copilot Studio can ground on up to 10 lists per agent, so Tier B uses all five.
+
 ### Later
 - P1-4 supply chain (SHA pins, Dependabot, attestation). P1-5 style lint. P1-6 styled .docx. Vendor-list intake. Quarterly guide review.
 

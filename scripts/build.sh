@@ -5,7 +5,7 @@ VERSION="v$(cat VERSION)"
 OUT="dist/kit"
 rm -rf dist && mkdir -p "$OUT" templates
 [ -f templates/reference.docx ] || pandoc -o templates/reference.docx --print-default-data-file reference.docx
-for dir in playbook packs library copilot examples reports lists drills build-guides; do
+for dir in playbook packs library copilot examples reports lists drills build-guides flows; do
   mkdir -p "$OUT/$dir"
   for f in "$dir"/*.md; do
     base="$(basename "$f" .md)"

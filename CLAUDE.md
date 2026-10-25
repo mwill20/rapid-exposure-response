@@ -23,8 +23,10 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 - `reports/AAR_REPORT_TEMPLATE.md` after-action report (filled copy stays in org SharePoint)
 - `copilot/` agent-instructions (block under 8,000 chars), prompts (RER-MAP, RER-NEXT, RER-CONTAIN, ...), output-schemas, setup
 - `lists/DATA_MODEL.md` five SharePoint Lists; `scripts/build_lists_import.py` generates the import workbook
-- `build-guides/` 00 read first, 01 site and Lists, 02 Agent Builder, 09 verification drill (03 to 08 are v0.4.0); every step: Goal / Where / Do / Expect / If different / Verify, with verified-on dates and Learn URLs
-- `drills/` inject-01 advisory (synthetic, includes an embedded-instruction test), answer key, SCORING.md
+- `build-guides/` 00 read first, 01 site and Lists, 02 Agent Builder, 03 Copilot Studio agent, 04 to 07 flows, 08 Tier B verification and operations, 09 verification drill; every step: Goal / Where / Do / Expect / If different / Verify, with verified-on dates and Learn URLs
+- `copilot/studio-agent-spec.md` Tier B agent (knowledge incl. five lists, four confirm-before-run write tools, two agent-flow tools, no delete, no direct send)
+- `flows/` 04 KEV intake (deterministic, no agent call), 05 expiry reminders, 06 owner notices with approval (respond-first agent flow), 07 AAR save (HTML, standard connectors)
+- `drills/` inject-01/02/03 advisories (synthetic, each with a different embedded-instruction test), answer keys, SCORING.md
 - `examples/php2shell-event-pack.md` worked example, public facts only
 - `scripts/` build.sh, build_tracker.py, build_lists_import.py, guard.sh, check_refs.py (+ test_check_refs.sh)
 - `work-side/` Get-RERUpdate.ps1 read-only updater, Get-RERUpdate.Tests.ps1 (Pester), Test-Updater.ps1 (analyzer + tests, `-Live` for a real release)

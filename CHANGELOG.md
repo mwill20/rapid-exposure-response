@@ -2,6 +2,16 @@
 
 Format: version, date, then Added / Changed / Removed. Keep entries generic.
 
+## 0.4.0 (2026-10-25)
+### Added
+- `copilot/studio-agent-spec.md`: Tier B agent with the five lists as knowledge, four SharePoint write tools that ask before running, two agent-flow tools, instructions addendum with /tool references, eight test cases, forbidden actions
+- `flows/`: 04 KEV email intake (deterministic), 05 expiry reminders (scheduled), 06 owner notices with approval (respond-first agent flow, Approvals custom responses Send/Hold), 07 AAR save as HTML (standard connectors; premium Word path optional)
+- Build guides 03 (Copilot Studio agent, copy from Agent Builder, lists as knowledge, tools, publish to Microsoft 365 Copilot), 04 to 07 (one per flow), 08 (Tier B verification drill, operating routine, fallback to Tier A, cost facts to confirm)
+- Drill 2 (embedded library RCE in a vendor appliance, Tier 2-only sources, HTML-comment injection) and drill 3 (information disclosure exploited in the wild, Tier 3 to Tier 1 escalation, orphan rule, retention gaps, URL injection), each with a 20-item answer key
+### Changed
+- SCORING.md generalized across drills with a rotation guide
+- Build guide 00 lists guides 03 to 08; guide 09 points at guide 08 for Tier B
+
 ## 0.3.0 (2026-10-25)
 ### Added
 - `lists/DATA_MODEL.md`: five SharePoint Lists (RER_Events, RER_Assets, RER_Controls, RER_Hunts, RER_Evidence) with column types, choice values, calculated hour columns, views, column formatting JSON for Grade and Expiry_Date, reminders and rules

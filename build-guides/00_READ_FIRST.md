@@ -8,7 +8,12 @@ These guides stand up the RER kit inside a Microsoft 365 tenant. They are writte
 | 01 SharePoint site and Lists | Restricted site, folders, five Lists, views, formatting, reminders | Site creation rights or an admin who has them |
 | 02 Agent Builder quickstart | The RER Assistant agent (Tier A) | Microsoft 365 Copilot licence with Agent Builder |
 | 09 Verification drill | Proof that 01 and 02 work, scored against an answer key | 01 and 02 done |
-| 03 to 08 (v0.4.0) | Copilot Studio agent and Power Automate flows (Tier B) | Copilot Studio and Power Automate access |
+| 03 Copilot Studio agent | The Tier B agent: five lists as knowledge, confirm-before-run write tools, published to Microsoft 365 Copilot | Copilot Studio access, Dataverse entitlement |
+| 04 KEV intake flow | A CISA KEV email becomes a draft event row and a Teams post | Shared mailbox, Power Automate |
+| 05 Expiry reminder flow | Daily list of controls expiring or expired | Power Automate |
+| 06 Notices with approval | The only send path, behind a Triage Lead approval | 03 done |
+| 07 AAR report flow | Saves the agent's AAR draft into the org workspace | 03 done |
+| 08 Tier B verification and operations | The Tier B drill, the operating routine, fallback to Tier A | 03 to 07 done |
 
 ## Before you start: tenant checks
 Ask your M365 admin, or check yourself, and write the answers in your org edition (never here):

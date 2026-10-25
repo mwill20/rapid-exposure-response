@@ -38,8 +38,10 @@ A generic, reusable playbook kit for reacting to emerging critical vulnerabiliti
 | `library/sources.md` | Trusted intel sources by tier |
 | `copilot/` | Agent instructions (under the 8,000-character limit), prompt pack, output schemas, setup guide |
 | `lists/` | Data model for the five SharePoint Lists and the import workbook generator (`RER_Lists_Import.xlsx` in every release) |
-| `build-guides/` | Step-by-step tenant build guides written to be followed with M365 Copilot: 00 read first, 01 site and Lists, 02 Agent Builder, 09 verification drill |
-| `drills/` | Synthetic advisories with answer keys and a scoring sheet; tabletop material and the regression test for the agent |
+| `build-guides/` | Step-by-step tenant build guides written to be followed with M365 Copilot: 00 read first, 01 site and Lists, 02 Agent Builder, 03 Copilot Studio agent, 04 to 07 flows, 08 Tier B operations, 09 verification drill |
+| `copilot/studio-agent-spec.md` | The Tier B agent: knowledge, confirm-before-run tools, instructions, test cases, what it must never do |
+| `flows/` | Power Automate specifications: KEV email intake, expiry reminders, owner notices behind approval, AAR save. Standard connectors only |
+| `drills/` | Three synthetic advisories with answer keys and a scoring sheet; tabletop material and the regression test for the agent |
 | `scripts/build_tracker.py` | Generates the tracker workbook (in every release zip) |
 | `examples/php2shell-event-pack.md` | Worked example from public information |
 | `work-side/Get-RERUpdate.ps1` | Optional read-only updater for the work device (tested with Pester, see `Test-Updater.ps1`) |
