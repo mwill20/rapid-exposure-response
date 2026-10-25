@@ -1,7 +1,7 @@
 # Handoff: from Claude chat to Claude Code
 
-## Status (M2 built, v0.3.0 pending push)
-Public repo: `github.com/mwill20/rapid-exposure-response`. v0.2.0 released 2026-10-25. M2 (Lists data model and import workbook, output schemas, rewritten agent instructions, build guides 00/01/02/09, drill 1 with answer key and scoring) is committed with VERSION 0.3.0. Scope and sequencing live in `docs/ROADMAP.md`. Next: the owner runs guides 01, 02 and 09 at work and records the drill score in the org edition; then M3 (v0.4.0).
+## Status (v0.3.0 published, M2 complete)
+Public repo: `github.com/mwill20/rapid-exposure-response`. v0.3.0 released 2026-10-25 automatically on the VERSION bump; release and live updater jobs green; zip has 60 entries including `lists/RER_Lists_Import.xlsx` with five tables and a .docx for every guide and drill file, checksum verified after download. M2 = Lists data model and import workbook, output schemas, rewritten agent instructions, build guides 00/01/02/09, drill 1 with answer key and scoring. Scope and sequencing live in `docs/ROADMAP.md`. Next: the owner runs guides 01, 02 and 09 at work and records the drill score in the org edition; then M3 (v0.4.0).
 
 M2 acceptance that only the owner can complete: create the Lists from the import workbook, build the agent, run drill 1, score 16/20 with no critical misses. Tenant facts verified from Microsoft Learn on 2026-10-25 and recorded in the guides: one SharePoint list per Agent Builder agent, 100 SharePoint files, 8,000-character instructions, Restricted SharePoint Search blocks SharePoint knowledge, Lists from Excel up to 5,000 rows.
 

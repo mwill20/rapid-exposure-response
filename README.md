@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" alt="RER Kit: Rapid Exposure Response" width="360"></p>
+
 # Rapid Exposure Response (RER) Kit
 
 A generic, reusable playbook kit for reacting to emerging critical vulnerabilities: **contain fast with compensating controls, remediate, verify, and hunt**. Built to be pulled one way into a work environment and run with Microsoft 365 Copilot.

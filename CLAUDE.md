@@ -30,6 +30,7 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 - `work-side/` Get-RERUpdate.ps1 read-only updater, Get-RERUpdate.Tests.ps1 (Pester), Test-Updater.ps1 (analyzer + tests, `-Live` for a real release)
 - `.github/workflows/` guard.yml (leak guard, cross-ref checker, updater analyzer and Pester on every push/PR), release.yml (VERSION change on main, or manual; then a live updater run against the new release)
 - `docs/` HANDOFF.md (status), ROADMAP.md (scope and milestones), KICKOFF_PROMPT.md
+- `assets/logo.png` project logo (the one binary committed on purpose; not part of the release zip)
 
 ## Commands
 ```bash
