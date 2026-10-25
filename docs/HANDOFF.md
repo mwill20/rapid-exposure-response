@@ -1,7 +1,13 @@
 # Handoff: from Claude chat to Claude Code
 
-## Status (v0.1.0, M0 in progress)
-Designed in a Claude chat session, imported into git on 2026-10-25 (baseline commit). Target: `github.com/mwill20/rapid-exposure-response`, **public** (decided: public keeps the work-side pull credential-free). Scope and sequencing live in `docs/ROADMAP.md`; this file holds status and known issues.
+## Status (v0.1.0 published, M0 complete)
+Public repo: `github.com/mwill20/rapid-exposure-response`. v0.1.0 released 2026-10-25 by manual dispatch of the release workflow. Scope and sequencing live in `docs/ROADMAP.md`; this file holds status and known issues. Next: M1 (v0.2.0) per the roadmap.
+
+### Verified in GitHub Actions (2026-10-25)
+- `guard` workflow green on the first push: leak guard, checker self-test, Windows job (PSScriptAnalyzer + Pester under PowerShell 5.1 and 7).
+- `release` workflow green by `workflow_dispatch`: pandoc build on ubuntu-latest, release `v0.1.0` with `rer-kit-v0.1.0.zip` (33 entries, a .docx beside every .md, `tracker/RER_Tracker.xlsx`) and `SHA256SUMS.txt`; checksum verified independently after download.
+- `verify-updater-live` job: `Get-RERUpdate.ps1` downloaded, verified and extracted v0.1.0 on windows-latest under PowerShell 5.1. P0-3 end-to-end acceptance met.
+- Finding: the `paths: ['VERSION']` push trigger does **not** fire when the branch is created by the first push. Manual dispatch is the documented fallback and works. Later VERSION bumps on an existing `main` should fire normally; confirm on the v0.2.0 release.
 
 ### Verified on the owner's machine (2026-10-25)
 - `scripts/guard.sh` clean on the repo; planted hostname, private IP and non-example email blocked; a denylist term with regex metacharacters matches literally.
@@ -15,12 +21,10 @@ Designed in a Claude chat session, imported into git on 2026-10-25 (baseline com
 - Event Pack .docx renders cleanly with pandoc's default reference doc.
 
 ### NOT verified (treat as untested)
-- Local build on the owner's Windows machine: pandoc, zip, openpyxl and pwsh are not installed, so `build.sh` has only run in the sandbox.
-- Any GitHub Actions run (guard.yml, release.yml have never executed).
-- Whether the `paths: ['VERSION']` trigger fires on a brand-new repo's first push. `workflow_dispatch` is the fallback.
-- `work-side/Get-RERUpdate.ps1` against a real release (the `verify-updater-live` job runs after the first publish). Mocked tests pass under 5.1; pwsh is not installed locally.
+- Local build on the owner's Windows machine: pandoc, zip, openpyxl and pwsh are not installed, so `build.sh` runs only in CI.
+- Whether the `paths: ['VERSION']` trigger fires on a normal VERSION bump to an existing `main` (first-push case confirmed not to fire).
+- `work-side/Get-RERUpdate.ps1` on a real work device under the org's script policy (CI proves it on windows-latest only).
 - Guard fail-closed branch (grep exit >= 2) is implemented but not exercised by a test.
-- Pandoc version differences between the sandbox and ubuntu-latest.
 - Real Copilot grounding behavior on the generated .docx files.
 
 ## Key decisions already made (do not relitigate without the owner)
@@ -39,18 +43,18 @@ Designed in a Claude chat session, imported into git on 2026-10-25 (baseline com
 ## Backlog (prioritized)
 Superseded by `docs/ROADMAP.md` for M1 onward. The P0 items below remain the M0 definition.
 
-### P0-1 Initialize and publish
+### P0-1 Initialize and publish (DONE 2026-10-25)
 - `git init -b main`, commit, `gh repo create mwill20/rapid-exposure-response --public --source=. --push` (ask before running).
 - If a repo with that name already exists (possible partial create from the failed connector), stop and ask.
 - Run `gh workflow run release` if the first push did not trigger it.
 - **AC:** guard workflow green; release v0.1.0 contains `rer-kit-v0.1.0.zip` and `SHA256SUMS.txt`; zip contains tracker .xlsx and all .docx files.
 
-### P0-2 Cross-reference checker
+### P0-2 Cross-reference checker (DONE 2026-10-25)
 - `scripts/check_refs.py`: every referenced playbook Section number, CTL-xx, Vx, Hx, and Event Pack section exists. Fail with a clear message.
 - Run it in guard.yml and in the pre-commit hook.
 - **AC:** passes now; fails when a reference is broken in a test.
 
-### P0-3 Validate the work-side updater
+### P0-3 Validate the work-side updater (DONE 2026-10-25)
 - Add a `windows-latest` job running PSScriptAnalyzer on `Get-RERUpdate.ps1`.
 - After P0-1, run a real download + checksum + extract test against the published release (in CI or locally with pwsh).
 - **AC:** analyzer clean; end-to-end test succeeds; mismatch path tested (corrupted checksum fails).
