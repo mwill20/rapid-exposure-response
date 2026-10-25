@@ -17,7 +17,8 @@ mkdir -p "$OUT/tracker" "$OUT/work-side"
 python3 scripts/build_tracker.py "$OUT/tracker/RER_Tracker.xlsx"
 python3 scripts/build_lists_import.py "$OUT/lists/RER_Lists_Import.xlsx"
 cp work-side/Get-RERUpdate.ps1 "$OUT/work-side/"
-cp README.md SECURITY.md CHANGELOG.md VERSION "$OUT/"
+cp README.md SECURITY.md CHANGELOG.md HOW_TO_USE.md VERSION "$OUT/"
+pandoc HOW_TO_USE.md -f gfm -t docx --reference-doc=templates/reference.docx -o "$OUT/HOW_TO_USE.docx"
 (cd "$OUT" && zip -qr "../rer-kit-$VERSION.zip" .)
 (cd dist && sha256sum "rer-kit-$VERSION.zip" > SHA256SUMS.txt)
 echo "Built dist/rer-kit-$VERSION.zip"

@@ -2,6 +2,12 @@
 
 Format: version, date, then Added / Changed / Removed. Keep entries generic.
 
+## 0.4.1 (2026-10-25)
+### Added
+- `HOW_TO_USE.md`: set up, run an event, update; shipped as .docx
+- Build provenance attestation on every release, verified in the workflow; `gh attestation verify` documented in README and SECURITY.md
+- GitHub Actions pinned to commit SHAs; Dependabot for Actions
+
 ## 0.4.0 (2026-10-25)
 ### Added
 - `copilot/studio-agent-spec.md`: Tier B agent with the five lists as knowledge, four SharePoint write tools that ask before running, two agent-flow tools, instructions addendum with /tool references, eight test cases, forbidden actions

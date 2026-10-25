@@ -30,7 +30,8 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 - `examples/php2shell-event-pack.md` worked example, public facts only
 - `scripts/` build.sh, build_tracker.py, build_lists_import.py, guard.sh, check_refs.py (+ test_check_refs.sh)
 - `work-side/` Get-RERUpdate.ps1 read-only updater, Get-RERUpdate.Tests.ps1 (Pester), Test-Updater.ps1 (analyzer + tests, `-Live` for a real release)
-- `.github/workflows/` guard.yml (leak guard, cross-ref checker, updater analyzer and Pester on every push/PR), release.yml (VERSION change on main, or manual; then a live updater run against the new release)
+- `.github/workflows/` guard.yml (leak guard, cross-ref checker, updater analyzer and Pester on every push/PR), release.yml (VERSION change on main, or manual; attests provenance, verifies it, then a live updater run). Actions pinned to commit SHAs; `.github/dependabot.yml` keeps them current.
+- `HOW_TO_USE.md` the novice walkthrough (set up, run an event, update); ships in the zip as .docx
 - `docs/` HANDOFF.md (status), ROADMAP.md (scope and milestones), KICKOFF_PROMPT.md
 - `assets/logo.png` project logo (the one binary committed on purpose; not part of the release zip)
 

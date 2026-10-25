@@ -1,5 +1,8 @@
 # Handoff: from Claude chat to Claude Code
 
+## Status (P1-4 and HOW_TO_USE built, v0.4.1 pending push)
+P1-4 done locally: Actions pinned to SHAs (checkout v7.0.1, attest-build-provenance v4.2.2), Dependabot, provenance attestation plus an in-workflow `gh attestation verify`. `HOW_TO_USE.md` added (three sections) and linked at the top of the README. Owner feedback 2026-10-25: keep the kit simple; Tier B is optional; do not add ceremony. The attestation step is untested until the v0.4.1 release runs.
+
 ## Status (v0.4.0 published, M3 complete, roadmap M0 to M3 done)
 v0.4.0 released 2026-10-25 automatically on the VERSION bump; release, guard and live updater jobs green; zip has 91 entries with a .docx for every spec, guide and drill file, checksum verified after download. M3 = Tier B: Copilot Studio agent spec, four flow specs, build guides 03 to 08, drills 2 and 3. Next: the owner runs guides 01, 02, 09 (Tier A) and then 03 to 08 (Tier B) at work and records drill scores in the org edition. Remaining repo work is the Later section of the roadmap (supply-chain hardening P1-4 first). Tenant facts verified from Microsoft Learn on 2026-10-25: Copilot Studio grounds on SharePoint sites and up to 10 lists per agent; tools can require end-user confirmation and run as the end user; agent flows must respond within 100 seconds with async off; Microsoft 365 Copilot licences zero-rate generative answers in Copilot and Teams while tools and flows may consume credits; Word Online (Business) is a premium connector; trigger payloads are a documented jailbreak surface. Nothing in M3 can be verified from here; guide 08 Part A is the acceptance test the owner runs.
 
@@ -65,7 +68,7 @@ Superseded by `docs/ROADMAP.md` for M1 onward. The P0 items below remain the M0 
 - After P0-1, run a real download + checksum + extract test against the published release (in CI or locally with pwsh).
 - **AC:** analyzer clean; end-to-end test succeeds; mismatch path tested (corrupted checksum fails).
 
-### P1-4 Supply-chain hardening
+### P1-4 Supply-chain hardening (DONE 2026-10-25, pending release proof)
 - Pin all Actions to full commit SHAs; add Dependabot for github-actions.
 - Add build provenance attestation to releases (e.g., `actions/attest-build-provenance`) and document `gh attestation verify` in README and SECURITY.md. This closes the gap that a same-release checksum cannot detect a compromised account.
 - **AC:** release has an attestation; docs updated.

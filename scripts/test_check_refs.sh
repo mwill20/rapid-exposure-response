@@ -14,7 +14,7 @@ trap 'rm -rf "$tmp"' EXIT
 for d in playbook packs library copilot examples reports lists drills build-guides tracker; do
   [ -d "$d" ] && mkdir -p "$tmp/$d" && cp -r "$d"/. "$tmp/$d/"
 done
-cp README.md SECURITY.md "$tmp/"
+cp README.md SECURITY.md HOW_TO_USE.md "$tmp/"
 
 cat >> "$tmp/examples/planted.md" <<'EOF'
 # Planted breaks

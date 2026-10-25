@@ -4,6 +4,8 @@
 
 A generic, reusable playbook kit for reacting to emerging critical vulnerabilities: **contain fast with compensating controls, remediate, verify, and hunt**. Built to be pulled one way into a work environment and run with Microsoft 365 Copilot.
 
+> **New here?** Read [HOW_TO_USE.md](HOW_TO_USE.md): set it up in a morning, run an event, update. It also ships in every release zip.
+>
 > **One-way rule:** GitHub to work. Nothing from work ever comes back here. This repo holds templates only, never organization data.
 
 ## How it works
@@ -53,7 +55,7 @@ Each release converts every Markdown file to `.docx`, because Copilot Notebooks 
 
 1. On the work device, open the repo's **Releases** page in a browser.
 2. Download `rer-kit-vX.Y.Z.zip` and `SHA256SUMS.txt`.
-3. Verify: `Get-FileHash .\rer-kit-vX.Y.Z.zip -Algorithm SHA256` and compare to the checksum file.
+3. Verify: `Get-FileHash .\rer-kit-vX.Y.Z.zip -Algorithm SHA256` and compare to the checksum file. On any machine with the GitHub CLI, `gh attestation verify rer-kit-vX.Y.Z.zip --repo mwill20/rapid-exposure-response` also proves the zip was built by this repository's release workflow.
 4. Extract into a synced folder such as `RER/upstream/vX.Y.Z` in a **restricted** SharePoint site.
 5. First time only: copy the playbook and tracker into `RER/org/` and fill them in there.
 6. Follow `build-guides/00_READ_FIRST.md`, then 01, 02 and 09, with Copilot walking you through each step.

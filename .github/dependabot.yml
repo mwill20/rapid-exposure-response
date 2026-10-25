@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Actions are pinned to commit SHAs with a version comment; Dependabot updates both.
+    commit-message:
+      prefix: "ci"

@@ -19,7 +19,8 @@ The `.githooks/pre-commit` hook and the `guard` CI workflow block common leak pa
 - Two-factor authentication on the GitHub account.
 - Branch protection on `main`; require pull requests even if you are the only author.
 - Sign tags (`git tag -s`) once a signing key is set up.
-- Releases include `SHA256SUMS.txt`. Note: a checksum from the same release only detects corruption or tampering in transit. It does not protect against a compromised account, which is why 2FA and signed tags matter.
+- Releases include `SHA256SUMS.txt`. A checksum from the same release only detects corruption or tampering in transit. Each release also carries a build provenance attestation; `gh attestation verify rer-kit-vX.Y.Z.zip --repo mwill20/rapid-exposure-response` proves the zip came from this repository's workflow at a specific commit, which a checksum alone cannot.
+- GitHub Actions are pinned to commit SHAs and updated by Dependabot.
 
 ## 4. Work-side handling
 - The updater only accepts release tags of the form `vX.Y.Z` and a zip named `rer-kit-vX.Y.Z.zip`, verifies SHA256 before extracting, and never writes outside `upstream\`. Pester tests cover the corrupted-checksum, bad-tag and wrong-asset paths.

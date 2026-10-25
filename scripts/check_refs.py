@@ -17,7 +17,7 @@ from pathlib import Path
 # Files whose content ships in the kit and therefore must resolve.
 SHIPPED_DIRS = ("playbook", "packs", "library", "copilot", "examples", "reports",
                 "drills", "lists", "flows", "build-guides")
-SHIPPED_ROOT_FILES = ("README.md", "SECURITY.md", "tracker/README.md")
+SHIPPED_ROOT_FILES = ("README.md", "SECURITY.md", "HOW_TO_USE.md", "tracker/README.md")
 
 PLAYBOOK = "playbook/RER_Playbook.md"
 EVENT_PACK = "packs/EVENT_PACK_TEMPLATE.md"

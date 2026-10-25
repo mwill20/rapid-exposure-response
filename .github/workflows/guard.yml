@@ -9,7 +9,7 @@ jobs:
   leak-guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Leak guard
         run: bash scripts/guard.sh
       - name: Cross-reference checker (with should-fail test)
@@ -18,7 +18,7 @@ jobs:
     name: Work-side updater (PSScriptAnalyzer + Pester)
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Analyze and test under PowerShell 7
         shell: pwsh
         run: ./work-side/Test-Updater.ps1
