@@ -13,7 +13,7 @@ The `.githooks/pre-commit` hook and the `guard` CI workflow block common leak pa
 ## 2. One-way flow
 - Work devices **download** releases. They never clone with credentials, push, open issues, or comment.
 - If a git clone is used at work, disable push: `git remote set-url --push origin DISABLED`.
-- Lessons learned at work return here only as **generic rewrites done from memory on a personal device**, never as copied text.
+- Nothing derived from a real event returns here, including lessons learned. Lessons go into the after-action report stored in the org workspace. Changes to this kit are design decisions made on a personal device without reference to any event.
 
 ## 3. Repo integrity
 - Two-factor authentication on the GitHub account.

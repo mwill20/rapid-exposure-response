@@ -17,7 +17,7 @@
 
 ## V4. External exposure is closed
 - Re-run external attack surface scan or an unauthenticated scan from outside.
-- Compare to the Step 2 exposure list.
+- Compare to the S1 exposure list (DT-1 grid).
 
 ## V5. Detection works
 - Simulate the behavior safely in a lab (for example, a web runtime spawning a harmless child process).

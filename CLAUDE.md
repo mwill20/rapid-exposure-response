@@ -17,9 +17,10 @@ Read `docs/HANDOFF.md` for current status and known issues, and `docs/ROADMAP.md
 GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERUpdate.ps1`) -> SharePoint `RER/upstream/vX.Y.Z` (read-only) + `RER/org/` (filled copies, never leaves M365) -> Copilot Notebook / agent grounded on both. Org edition wins on conflict.
 
 ## Repo map
-- `playbook/RER_Playbook.md` standing protocol (Sections 0 to 11, Appendices A to D)
+- `playbook/RER_Playbook.md` standing protocol (Sections 0 to 11, Appendices A to D; Section 6 is stages S0 to S7 with entry/exit gates)
 - `packs/EVENT_PACK_TEMPLATE.md` per-vuln worksheet (Sections A to I)
-- `library/` controls (CTL-01..07), verification (V1..V7), hunts (H1..H6), sources (tiers)
+- `library/` controls (CTL-01..07), verification (V1..V7), hunts (H1..H7), sources (tiers), decision_tables (DT-1 exposure, DT-2 controls, DT-3 evidence, DT-4 hunts)
+- `reports/AAR_REPORT_TEMPLATE.md` after-action report (filled copy stays in org SharePoint)
 - `copilot/` agent instructions, prompt pack (RER-MAP, UPSTREAM-DIFF, etc.), setup
 - `examples/php2shell-event-pack.md` worked example, public facts only
 - `scripts/` build.sh, build_tracker.py, guard.sh, check_refs.py (+ test_check_refs.sh)
@@ -41,7 +42,7 @@ Dependencies: git, gh, pandoc, python3 + openpyxl, zip. Updater tests: Windows P
 
 ## Conventions
 - Markers: `[FILL: ...]` human-only; `[COPILOT: ...]` Copilot drafts, human verifies.
-- IDs are cross-referenced across files (playbook section numbers, CTL-xx, Vx, Hx, Event Pack letters). If you renumber anything, update every reference in the same change.
+- IDs are cross-referenced across files (playbook section numbers, stages Sx, CTL-xx, Vx, Hx, DT-x, Event Pack letters). If you renumber anything, update every reference in the same change.
 - Release = bump `VERSION` + add a `CHANGELOG.md` entry. Merging a VERSION change to main publishes the release.
 - Prose style: plain, direct, no em dashes, short sentences. These docs ship publicly under the owner's name.
 - Keep Copilot instruction blocks short enough to paste into a single instructions field.

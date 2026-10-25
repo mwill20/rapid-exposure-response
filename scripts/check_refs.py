@@ -2,8 +2,8 @@
 """Cross-reference checker for the RER Kit.
 
 Every reference to a playbook Section, Step or Appendix, a control (CTL-xx),
-a verification check (Vx), a hunt (Hx), a stage (Sx) or an Event Pack section
-letter must point at something that is defined. Fails with file:line messages.
+a verification check (Vx), a hunt (Hx), a stage (Sx), a decision table (DT-x)
+or an Event Pack section letter must point at something that is defined. Fails with file:line messages.
 
 Usage: python3 scripts/check_refs.py [--root DIR]
 Exit codes: 0 all references resolve, 1 unresolved references, 2 setup error.
@@ -26,6 +26,7 @@ DEFS = {
     "CTL": ("library/controls.md", re.compile(r"^##\s+(CTL-\d{2})\b")),
     "V": ("library/verification.md", re.compile(r"^##\s+(V\d)\.")),
     "H": ("library/hunts.md", re.compile(r"^##\s+(H\d)\.")),
+    "DT": ("library/decision_tables.md", re.compile(r"^##\s+(DT-\d)\b")),
     "S": (PLAYBOOK, re.compile(r"^#{2,3}\s+(S\d)\.")),
     "Section": (PLAYBOOK, re.compile(r"^#{2,3}\s+(\d+(?:\.\d+)?)\.?\s")),
     "Step": (PLAYBOOK, re.compile(r"^###\s+Step\s+(\d+)\.")),
@@ -39,6 +40,7 @@ REFS = [
     ("CTL", re.compile(r"(?<![A-Za-z0-9_-])(CTL-\d{2})(?![0-9])")),
     ("V", re.compile(r"(?<![A-Za-z0-9_/.-])(V\d)(?![0-9A-Za-z.])")),
     ("H", re.compile(r"(?<![A-Za-z0-9_/.-])(H\d)(?![0-9A-Za-z.])")),
+    ("DT", re.compile(r"(?<![A-Za-z0-9_-])(DT-\d)(?![0-9])")),
     ("S", re.compile(r"(?<![A-Za-z0-9_/.-])(S\d)(?![0-9A-Za-z.])")),
     ("Section", re.compile(r"\b(?:Playbook\s+)?Section\s+(\d+(?:\.\d+)?)(?![0-9.])")),
     ("Section", re.compile(r"\bPlaybook\s+(\d+\.\d+)(?![0-9.])")),
@@ -111,7 +113,7 @@ def main() -> int:
         for lineno, kind, ident in find_references(path):
             counted += 1
             if ident not in defined[kind]:
-                label = ident if kind in ("CTL", "V", "H", "S") else f"{kind} {ident}"
+                label = ident if kind in ("CTL", "V", "H", "S", "DT") else f"{kind} {ident}"
                 problems.append(f"{rel}:{lineno}: unresolved {label}")
 
     for p in problems:

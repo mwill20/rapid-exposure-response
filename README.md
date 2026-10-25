@@ -26,11 +26,13 @@ A generic, reusable playbook kit for reacting to emerging critical vulnerabiliti
 
 | Path | Purpose |
 |---|---|
-| `playbook/RER_Playbook.md` | The standing protocol (source of truth) |
+| `playbook/RER_Playbook.md` | The standing protocol: eight stages S0 to S7 with entry and exit gates |
 | `packs/EVENT_PACK_TEMPLATE.md` | One per vulnerability: Copilot maps the advisory to the playbook |
 | `library/controls.md` | Compensating controls with verification recipes |
 | `library/verification.md` | How to prove a fix or control works |
-| `library/hunts.md` | Retro-hunt hypotheses, SIEM-agnostic |
+| `library/hunts.md` | Retro-hunt hypotheses H1 to H7, SIEM-agnostic, with required data and four outcomes |
+| `library/decision_tables.md` | DT-1 exposure rubric, DT-2 control matrix, DT-3 evidence standards, DT-4 hunt selection |
+| `reports/AAR_REPORT_TEMPLATE.md` | After-action report, filled copy stays in org SharePoint |
 | `library/sources.md` | Trusted intel sources by tier |
 | `copilot/` | Agent instructions, prompt pack, setup guide |
 | `scripts/build_tracker.py` | Generates the tracker workbook (in every release zip) |

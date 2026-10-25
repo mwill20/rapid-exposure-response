@@ -1,7 +1,9 @@
 # Handoff: from Claude chat to Claude Code
 
-## Status (v0.1.0 published, M0 complete)
-Public repo: `github.com/mwill20/rapid-exposure-response`. v0.1.0 released 2026-10-25 by manual dispatch of the release workflow. Scope and sequencing live in `docs/ROADMAP.md`; this file holds status and known issues. Next: M1 (v0.2.0) per the roadmap.
+## Status (M1 built locally, v0.2.0 not yet pushed)
+Public repo: `github.com/mwill20/rapid-exposure-response`. v0.1.0 released 2026-10-25. M1 (staged playbook S0 to S7, decision tables DT-1 to DT-4, H7 and hunt outcomes, AAR template, Event Pack and prompts aligned) is committed locally with VERSION 0.2.0. Pushing to main publishes v0.2.0 and tests whether the VERSION path trigger fires on an existing branch. Scope and sequencing live in `docs/ROADMAP.md`. Next: M2 per the roadmap.
+
+M1 acceptance: checker 100+ references resolve including DT-x and Sx; guard clean; updater tests green; the worked example cites DT-1 rows, a DT-2 row and the DT-4 class. The drill-1 answer key (M2) will be the first independent consistency check of the tables.
 
 ### Verified in GitHub Actions (2026-10-25)
 - `guard` workflow green on the first push: leak guard, checker self-test, Windows job (PSScriptAnalyzer + Pester under PowerShell 5.1 and 7).
