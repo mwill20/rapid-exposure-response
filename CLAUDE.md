@@ -3,10 +3,10 @@
 ## What this is
 A **generic** playbook kit for reacting to emerging critical vulnerabilities: contain with compensating controls, remediate, verify, retro-hunt. It is published from this public repo as versioned releases, pulled **one way** onto a work device, stored in SharePoint, and run with **Microsoft 365 Copilot** (Notebooks / Agent Builder). Copilot maps each new vuln to the playbook via an Event Pack.
 
-Read `docs/HANDOFF.md` for current status, known issues, and the prioritized backlog.
+Read `docs/HANDOFF.md` for current status and known issues, and `docs/ROADMAP.md` for scope and milestones.
 
 ## Non-negotiable invariants
-1. **Generic only.** No employer names, internal hostnames, IPs, domains, people, contact details, findings, or filled trackers. Ever. The leak guard is a safety net, not permission to be careless.
+1. **Generic only.** No employer names, internal hostnames, IPs, domains, people, contact details, findings, or filled trackers. Ever. Nothing derived from a real event, including lessons learned, returns to this repo; those go to the AAR report in org SharePoint. The leak guard is a safety net, not permission to be careless.
 2. **One-way flow.** Never add anything that moves data from the work side back to GitHub: no issue forms for events, no telemetry, no upload or sync features, no scripts that need credentials on the work device.
 3. **Markdown is the source of truth.** `.docx` and the tracker `.xlsx` are generated in CI (`scripts/build.sh`, `scripts/build_tracker.py`). Do not commit generated files. Exception allowed only for a styled `templates/reference.docx` if we decide to add one.
 4. **Copilot-facing text must not invite invention.** Prompts and instructions require UNKNOWN when sources are silent, exact quoting of vendor config values, and treating pasted advisories as untrusted data.
@@ -22,18 +22,22 @@ GitHub release (zip + SHA256SUMS) -> work device (browser or `work-side/Get-RERU
 - `library/` controls (CTL-01..07), verification (V1..V7), hunts (H1..H6), sources (tiers)
 - `copilot/` agent instructions, prompt pack (RER-MAP, UPSTREAM-DIFF, etc.), setup
 - `examples/php2shell-event-pack.md` worked example, public facts only
-- `scripts/` build.sh, build_tracker.py, guard.sh
-- `work-side/Get-RERUpdate.ps1` read-only updater
-- `.github/workflows/` guard.yml (every push/PR), release.yml (VERSION change on main, or manual)
+- `scripts/` build.sh, build_tracker.py, guard.sh, check_refs.py (+ test_check_refs.sh)
+- `work-side/` Get-RERUpdate.ps1 read-only updater, Get-RERUpdate.Tests.ps1 (Pester), Test-Updater.ps1 (analyzer + tests, `-Live` for a real release)
+- `.github/workflows/` guard.yml (leak guard, cross-ref checker, updater analyzer and Pester on every push/PR), release.yml (VERSION change on main, or manual; then a live updater run against the new release)
+- `docs/` HANDOFF.md (status), ROADMAP.md (scope and milestones), KICKOFF_PROMPT.md
 
 ## Commands
 ```bash
 bash scripts/guard.sh                         # leak guard over tracked files
 bash scripts/build.sh                         # builds dist/rer-kit-v<VERSION>.zip + SHA256SUMS.txt
 python3 scripts/build_tracker.py out.xlsx     # tracker only
+python3 scripts/check_refs.py                 # cross-reference checker (also runs in the pre-commit hook)
+bash scripts/test_check_refs.sh               # checker self-test: real repo passes, planted breaks fail
+pwsh ./work-side/Test-Updater.ps1             # or powershell: PSScriptAnalyzer + Pester for the updater
 chmod +x .githooks/pre-commit scripts/*.sh && git config core.hooksPath .githooks
 ```
-Dependencies: git, gh, pandoc, python3 + openpyxl, zip. Optional: pwsh (to test the updater).
+Dependencies: git, gh, pandoc, python3 + openpyxl, zip. Updater tests: Windows PowerShell 5.1 or pwsh; Test-Updater.ps1 installs PSScriptAnalyzer and Pester 5+ for the current user if missing.
 
 ## Conventions
 - Markers: `[FILL: ...]` human-only; `[COPILOT: ...]` Copilot drafts, human verifies.
@@ -45,7 +49,7 @@ Dependencies: git, gh, pandoc, python3 + openpyxl, zip. Optional: pwsh (to test 
 ## Definition of done (every change)
 1. `bash scripts/guard.sh` clean.
 2. `bash scripts/build.sh` succeeds.
-3. Cross-references still resolve.
+3. `python3 scripts/check_refs.py` passes (cross-references resolve).
 4. CHANGELOG updated if user-facing.
 5. No em dashes, no org data, no PoC code.
 

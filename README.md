@@ -35,7 +35,8 @@ A generic, reusable playbook kit for reacting to emerging critical vulnerabiliti
 | `copilot/` | Agent instructions, prompt pack, setup guide |
 | `scripts/build_tracker.py` | Generates the tracker workbook (in every release zip) |
 | `examples/php2shell-event-pack.md` | Worked example from public information |
-| `work-side/Get-RERUpdate.ps1` | Optional read-only updater for the work device |
+| `work-side/Get-RERUpdate.ps1` | Optional read-only updater for the work device (tested with Pester, see `Test-Updater.ps1`) |
+| `scripts/check_refs.py` | Cross-reference checker: every Section, CTL, V, H and Event Pack reference must exist |
 
 Each release converts every Markdown file to `.docx`, because Copilot Notebooks ground on Office files and PDFs, not Markdown.
 
@@ -63,6 +64,7 @@ chmod +x .githooks/pre-commit scripts/*.sh
 git config core.hooksPath .githooks    # enable the leak guard locally
 cp .guard/local-denylist.example.txt .guard/local-denylist.txt   # add your private terms (gitignored)
 # edit Markdown, bump VERSION, add CHANGELOG entry
+bash scripts/guard.sh && python3 scripts/check_refs.py   # what the hook and CI run
 git push origin main   # a VERSION change on main makes CI build and publish the release
 ```
 

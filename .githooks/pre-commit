@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
-# Runs the leak guard on staged files. Enable with: git config core.hooksPath .githooks
+# Runs the leak guard on staged files and the cross-reference checker when
+# any Markdown is staged. Enable with: git config core.hooksPath .githooks
 mapfile -t staged < <(git diff --cached --name-only --diff-filter=ACM)
 [ ${#staged[@]} -eq 0 ] && exit 0
 # Binary Office files can't be scanned; warn on tracker changes
+md=0
 for f in "${staged[@]}"; do
-  case "$f" in tracker/*.xlsx) echo "WARNING: tracker changed. Confirm it contains only the EXAMPLE rows.";; esac
+  case "$f" in
+    tracker/*.xlsx) echo "WARNING: tracker changed. Confirm it contains only the EXAMPLE rows.";;
+    *.md) md=1;;
+  esac
 done
-exec scripts/guard.sh "${staged[@]}"
+scripts/guard.sh "${staged[@]}" || exit 1
+if [ $md -eq 1 ]; then
+  py=python3; command -v python3 >/dev/null 2>&1 || py=python
+  "$py" scripts/check_refs.py || exit 1
+fi

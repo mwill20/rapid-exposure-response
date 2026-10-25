@@ -10,4 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: bash scripts/guard.sh
+      - name: Leak guard
+        run: bash scripts/guard.sh
+      - name: Cross-reference checker (with should-fail test)
+        run: bash scripts/test_check_refs.sh
+  updater:
+    name: Work-side updater (PSScriptAnalyzer + Pester)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyze and test under PowerShell 7
+        shell: pwsh
+        run: ./work-side/Test-Updater.ps1
+      - name: Analyze and test under Windows PowerShell 5.1
+        shell: powershell
+        run: ./work-side/Test-Updater.ps1

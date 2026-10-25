@@ -1,5 +1,6 @@
 name: release
-# Publishes a release whenever VERSION changes on main (or on manual run / version tag).
+# Publishes a release whenever VERSION changes on main (or on manual run).
+# After publishing, runs the work-side updater against the real release.
 on:
   push:
     branches: [main]
@@ -10,6 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.v.outputs.tag }}
+      published: ${{ steps.exists.outputs.skip == 'false' }}
     steps:
       - uses: actions/checkout@v4
       - name: Resolve version
@@ -24,11 +28,14 @@ jobs:
       - name: Leak guard
         if: steps.exists.outputs.skip == 'false'
         run: bash scripts/guard.sh
+      - name: Cross-reference checker
+        if: steps.exists.outputs.skip == 'false'
+        run: python3 scripts/check_refs.py
       - name: Install tools
         if: steps.exists.outputs.skip == 'false'
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc zip
-          pip install openpyxl
+          pip install openpyxl==3.1.5
       - name: Build kit
         if: steps.exists.outputs.skip == 'false'
         run: bash scripts/build.sh
@@ -41,3 +48,16 @@ jobs:
           gh release create "$TAG" "dist/rer-kit-$TAG.zip" dist/SHA256SUMS.txt \
             --target "$GITHUB_SHA" --title "RER Kit $TAG" \
             --notes "See CHANGELOG.md. Verify SHA256 before use."
+
+  verify-updater-live:
+    # End-to-end proof: the read-only updater downloads, verifies and extracts the release just published.
+    needs: build
+    if: needs.build.outputs.published == 'true'
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Live updater run (Windows PowerShell 5.1)
+        shell: powershell
+        run: ./work-side/Test-Updater.ps1 -Live -Owner "${{ github.repository_owner }}" -Repo "${{ github.event.repository.name }}"

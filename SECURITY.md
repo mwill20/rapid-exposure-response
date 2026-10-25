@@ -22,6 +22,7 @@ The `.githooks/pre-commit` hook and the `guard` CI workflow block common leak pa
 - Releases include `SHA256SUMS.txt`. Note: a checksum from the same release only detects corruption or tampering in transit. It does not protect against a compromised account, which is why 2FA and signed tags matter.
 
 ## 4. Work-side handling
+- The updater only accepts release tags of the form `vX.Y.Z` and a zip named `rer-kit-vX.Y.Z.zip`, verifies SHA256 before extracting, and never writes outside `upstream\`. Pester tests cover the corrupted-checksum, bad-tag and wrong-asset paths.
 - Store extracted files in a restricted SharePoint location. Copilot surfaces content to anyone with access.
 - Follow your organization's acceptable-use and software policies. If running scripts from the internet is not allowed, use the browser download path in the README.
 
